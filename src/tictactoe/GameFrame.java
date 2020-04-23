@@ -115,6 +115,7 @@ public class GameFrame extends JFrame {
         this.setBackground(Color.white);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setSize(304, 390);
+        this.setResizable(false);
 
         p1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
@@ -320,6 +321,7 @@ public class GameFrame extends JFrame {
         p7Label.setText("");
         p8Label.setText("");
         p9Label.setText("");
+        outcomeLabel.setText("");
         
     }
 
