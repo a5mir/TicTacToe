@@ -3,7 +3,8 @@ package tictactoe;
 import java.awt.Color;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import java.awt.event.MouseEvent;
+import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -17,21 +18,31 @@ public class GameFrame extends JFrame {
 
     JPanel gamePanel = new JPanel();
     JPanel statisticPanel = new JPanel();
-    JPanel p00 = new JPanel();
-    JPanel p01 = new JPanel();
-    JPanel p02 = new JPanel();
-    JPanel p10 = new JPanel();
-    JPanel p11 = new JPanel();
-    JPanel p12 = new JPanel();
-    JPanel p20 = new JPanel();
-    JPanel p21 = new JPanel();
-    JPanel p22 = new JPanel();
-    JLabel playerLabel = new JLabel("Player 1");
-    JButton restartButton = new JButton();
-    JButton statistics = new JButton();
-    JLabel sign = new JLabel();
+    JPanel p1 = new JPanel();
+    JPanel p2 = new JPanel();
+    JPanel p3 = new JPanel();
+    JPanel p4 = new JPanel();
+    JPanel p5 = new JPanel();
+    JPanel p6 = new JPanel();
+    JPanel p7 = new JPanel();
+    JPanel p8 = new JPanel();
+    JPanel p9 = new JPanel();
+
+    JLabel p1Label = new JLabel();
+    JLabel p2Label = new JLabel();
+    JLabel p3Label = new JLabel();
+    JLabel p4Label = new JLabel();
+    JLabel p5Label = new JLabel();
+    JLabel p6Label = new JLabel();
+    JLabel p7Label = new JLabel();
+    JLabel p8Label = new JLabel();
+    JLabel p9Label = new JLabel();
+
+    JLabel outcomeLabel = new JLabel("");
+    JButton newGameButton = new JButton("New Game");
+
     GridBagLayout gbLayout = new GridBagLayout();
-//    JLabel result = new JLabel("test");
+    TicTacToe game = new TicTacToe();
 
     public GameFrame() {
         initComponents();
@@ -42,135 +53,274 @@ public class GameFrame extends JFrame {
         this.add(gamePanel);
         this.add(statisticPanel);
 
-        gamePanel.add(p00);
-        gamePanel.add(p01);
-        gamePanel.add(p02);
-        gamePanel.add(p10);
-        gamePanel.add(p11);
-        gamePanel.add(p12);
-        gamePanel.add(p20);
-        gamePanel.add(p21);
-        gamePanel.add(p22);
+        gamePanel.add(p1);
+        gamePanel.add(p2);
+        gamePanel.add(p3);
+        gamePanel.add(p4);
+        gamePanel.add(p5);
+        gamePanel.add(p6);
+        gamePanel.add(p7);
+        gamePanel.add(p8);
+        gamePanel.add(p9);
 
         gamePanel.setSize(304, 304);
         gamePanel.setLayout(new GridLayout(3, 3, 2, 2));
-        p00.setBackground(Color.gray);
-        p01.setBackground(Color.gray);
-        p02.setBackground(Color.gray);
-        p10.setBackground(Color.gray);
-        p11.setBackground(Color.gray);
-        p12.setBackground(Color.gray);
-        p20.setBackground(Color.gray);
-        p21.setBackground(Color.gray);
-        p22.setBackground(Color.gray);
+        p1.setBackground(Color.gray);
+        p2.setBackground(Color.gray);
+        p3.setBackground(Color.gray);
+        p4.setBackground(Color.gray);
+        p5.setBackground(Color.gray);
+        p6.setBackground(Color.gray);
+        p7.setBackground(Color.gray);
+        p8.setBackground(Color.gray);
+        p9.setBackground(Color.gray);
 
         gamePanel.setBackground(Color.white);
 
         statisticPanel.setLayout(null);
         statisticPanel.setSize(304, 50);
-        statisticPanel.setBackground(Color.yellow);
-        statisticPanel.setLocation(0, 304);
+        statisticPanel.setBackground(Color.gray);
+        statisticPanel.setLocation(0, 306);
 
-        statisticPanel.add(playerLabel);
-        statisticPanel.add(restartButton);
-//        statisticPanel.add(result);
-//        statisticPanel.add(statistics);
+        statisticPanel.add(outcomeLabel);
+        statisticPanel.add(newGameButton);
 
-        playerLabel.setSize(80, 10);
-        playerLabel.setLocation(5, 5);
-//        result.setLocation(100,20);
-//
-//        p00.setLayout(new GridLayout());
+        outcomeLabel.setSize(150, 20);
+        outcomeLabel.setLocation(5, 12);
+        newGameButton.setSize(120, 30);
+        newGameButton.setLocation(160, 7);
 
-        p02.setLayout(gbLayout);
-        p02.add(sign);
-        p10.setLayout(gbLayout);
-        p10.add(sign);
-        p11.setLayout(gbLayout);
-        p11.add(sign);
-        p12.setLayout(gbLayout);
-        p12.add(sign);
-        p20.setLayout(gbLayout);
-        p20.add(sign);
-        p21.setLayout(gbLayout);
-        p21.add(sign);
-        p22.setLayout(gbLayout);
-        p22.add(sign);
+        p1.setLayout(gbLayout);
+        p1.add(p1Label);
+        p2.setLayout(gbLayout);
+        p2.add(p2Label);
+        p3.setLayout(gbLayout);
+        p3.add(p3Label);
+        p4.setLayout(gbLayout);
+        p4.add(p4Label);
+        p5.setLayout(gbLayout);
+        p5.add(p5Label);
+        p6.setLayout(gbLayout);
+        p6.add(p6Label);
+        p7.setLayout(gbLayout);
+        p7.add(p7Label);
+        p8.setLayout(gbLayout);
+        p8.add(p8Label);
+        p9.setLayout(gbLayout);
+        p9.add(p9Label);
 
         this.setLayout(null);
         this.setTitle("Tic-Tac-Toe");
 //        this.setLocationRelativeTo(null);
         this.setBackground(Color.white);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setSize(400, 400);
+        this.setSize(304, 390);
 
-        p00.addMouseListener(new java.awt.event.MouseAdapter() {
-            @Override
-            public void mouseReleased(MouseEvent evt) {
-                p00.setLayout(gbLayout);
-                p00.add(sign);
-                sign.setText("<html><font color ='blue' size=20>X</font></html>");
+        p1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                if (p1Label.getText().isEmpty() && !game.isFinished) {
+                    p1MouseReleased(evt);
+                }
+            }
+        });
+        p2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                if (p2Label.getText().isEmpty()) {
+                    p2MouseReleased(evt);
+                }
+            }
+        });
+        p3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                if (p3Label.getText().isEmpty() && !game.isFinished) {
+                    p3MouseReleased(evt);
+                }
+            }
+        });
+        p4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                if (p4Label.getText().isEmpty() && !game.isFinished) {
+                    p4MouseReleased(evt);
+                }
+            }
+        });
+        p5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                if (p5Label.getText().isEmpty() && !game.isFinished) {
+                    p5MouseReleased(evt);
+                }
+            }
+        });
+        p6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                if (p6Label.getText().isEmpty() && !game.isFinished) {
+                    p6MouseReleased(evt);
+                }
+            }
+        });
+        p7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                if (p7Label.getText().isEmpty() && !game.isFinished) {
+                    p7MouseReleased(evt);
+                }
+            }
+        });
+        p8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                if (p8Label.getText().isEmpty() && !game.isFinished) {
+                    p8MouseReleased(evt);
+                }
+            }
+        });
+        p9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                if (p9Label.getText().isEmpty() && !game.isFinished) {
+                    p9MouseReleased(evt);
+                }
             }
         });
 
-        p01.addMouseListener(new java.awt.event.MouseAdapter() {
-            @Override
-            public void mouseReleased(MouseEvent evt) {
-                p01.setLayout(gbLayout);
-                p01.add(sign);
-                sign.setText("<html><font color ='blue' size=20>X</font></html>");
+        newGameButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                newGameButtonReleased(evt);
             }
         });
 
-        p02.addMouseListener(new java.awt.event.MouseAdapter() {
-            @Override
-            public void mouseReleased(MouseEvent evt) {
-                sign.setText("<html><font color ='blue' size=20>X</font></html>");
-            }
-        });
+    }
 
-        p10.addMouseListener(new java.awt.event.MouseAdapter() {
-            @Override
-            public void mouseReleased(MouseEvent evt) {
-                sign.setText("<html><font color ='blue' size=20>X</font></html>");
-            }
-        });
+    private void mouseHelper() {
 
-        p11.addMouseListener(new java.awt.event.MouseAdapter() {
-            @Override
-            public void mouseReleased(MouseEvent evt) {
-                sign.setText("<html><font color ='blue' size=20>X</font></html>");
-            }
-        });
+    }
 
-        p12.addMouseListener(new java.awt.event.MouseAdapter() {
-            @Override
-            public void mouseReleased(MouseEvent evt) {
-                sign.setText("<html><font color ='blue' size=20>X</font></html>");
-            }
-        });
+    private void p1MouseReleased(java.awt.event.MouseEvent evt) {
+        game.setCorrectSign();
+        char tempChar = game.sign;
+        if (tempChar == 'X') {
+            p1Label.setText("<html><font color='red' size=15>" + String.valueOf(game.sign) + "</font></html>");
+        } else {
+            p1Label.setText("<html><font color='blue' size=15>" + String.valueOf(game.sign) + "</font></html>");
+        }
+        game.registerSign(0);
+        game.declareWinner();
+        outcomeLabel.setText(game.status);
+    }
 
-        p20.addMouseListener(new java.awt.event.MouseAdapter() {
-            @Override
-            public void mouseReleased(MouseEvent evt) {
-                sign.setText("<html><font color ='blue' size=20>X</font></html>");
-            }
-        });
+    private void p2MouseReleased(java.awt.event.MouseEvent evt) {
+        game.setCorrectSign();
+        char tempChar = game.sign;
+        if (tempChar == 'X') {
+            p2Label.setText("<html><font color='red' size=15>" + String.valueOf(game.sign) + "</font></html>");
+        } else {
+            p2Label.setText("<html><font color='blue' size=15>" + String.valueOf(game.sign) + "</font></html>");
+        }
+        game.registerSign(1);
+        game.declareWinner();
+        outcomeLabel.setText(game.status);
+    }
 
-        p21.addMouseListener(new java.awt.event.MouseAdapter() {
-            @Override
-            public void mouseReleased(MouseEvent evt) {
-                sign.setText("<html><font color ='blue' size=20>X</font></html>");
-            }
-        });
+    private void p3MouseReleased(java.awt.event.MouseEvent evt) {
+        game.setCorrectSign();
+        char tempChar = game.sign;
+        if (tempChar == 'X') {
+            p3Label.setText("<html><font color='red' size=15>" + String.valueOf(game.sign) + "</font></html>");
+        } else {
+            p3Label.setText("<html><font color='blue' size=15>" + String.valueOf(game.sign) + "</font></html>");
+        }
+        game.registerSign(2);
+        game.declareWinner();
+        outcomeLabel.setText(game.status);
+    }
 
-        p22.addMouseListener(new java.awt.event.MouseAdapter() {
-            @Override
-            public void mouseReleased(MouseEvent evt) {
-                sign.setText("<html><font color ='blue' size=20>X</font></html>");
-            }
-        });
+    private void p4MouseReleased(java.awt.event.MouseEvent evt) {
+        game.setCorrectSign();
+        char tempChar = game.sign;
+        if (tempChar == 'X') {
+            p4Label.setText("<html><font color='red' size=15>" + String.valueOf(game.sign) + "</font></html>");
+        } else {
+            p4Label.setText("<html><font color='blue' size=15>" + String.valueOf(game.sign) + "</font></html>");
+        }
+        game.registerSign(3);
+        game.declareWinner();
+        outcomeLabel.setText(game.status);
+    }
 
+    private void p5MouseReleased(java.awt.event.MouseEvent evt) {
+        game.setCorrectSign();
+        char tempChar = game.sign;
+        if (tempChar == 'X') {
+            p5Label.setText("<html><font color='red' size=15>" + String.valueOf(game.sign) + "</font></html>");
+        } else {
+            p5Label.setText("<html><font color='blue' size=15>" + String.valueOf(game.sign) + "</font></html>");
+        }
+        game.registerSign(4);
+        game.declareWinner();
+        outcomeLabel.setText(game.status);
+    }
+
+    private void p6MouseReleased(java.awt.event.MouseEvent evt) {
+        game.setCorrectSign();
+        char tempChar = game.sign;
+        if (tempChar == 'X') {
+            p6Label.setText("<html><font color='red' size=15>" + String.valueOf(game.sign) + "</font></html>");
+        } else {
+            p6Label.setText("<html><font color='blue' size=15>" + String.valueOf(game.sign) + "</font></html>");
+        }
+        game.registerSign(5);
+        game.declareWinner();
+        outcomeLabel.setText(game.status);
+    }
+
+    private void p7MouseReleased(java.awt.event.MouseEvent evt) {
+        game.setCorrectSign();
+        char tempChar = game.sign;
+        if (tempChar == 'X') {
+            p7Label.setText("<html><font color='red' size=15>" + String.valueOf(game.sign) + "</font></html>");
+        } else {
+            p7Label.setText("<html><font color='blue' size=15>" + String.valueOf(game.sign) + "</font></html>");
+        }
+        game.registerSign(6);
+        game.declareWinner();
+        outcomeLabel.setText(game.status);
+    }
+
+    private void p8MouseReleased(java.awt.event.MouseEvent evt) {
+        game.setCorrectSign();
+        char tempChar = game.sign;
+        if (tempChar == 'X') {
+            p8Label.setText("<html><font color='red' size=15>" + String.valueOf(game.sign) + "</font></html>");
+        } else {
+            p8Label.setText("<html><font color='blue' size=15>" + String.valueOf(game.sign) + "</font></html>");
+        }
+        game.registerSign(7);
+        game.declareWinner();
+        outcomeLabel.setText(game.status);
+    }
+
+    private void p9MouseReleased(java.awt.event.MouseEvent evt) {
+        game.setCorrectSign();
+        char tempChar = game.sign;
+        if (tempChar == 'X') {
+            p9Label.setText("<html><font color='red' size=15>" + String.valueOf(game.sign) + "</font></html>");
+        } else {
+            p9Label.setText("<html><font color='blue' size=15>" + String.valueOf(game.sign) + "</font></html>");
+        }
+        game.registerSign(8);
+        game.declareWinner();
+        outcomeLabel.setText(game.status);
+    }
+    
+    private void newGameButtonReleased(java.awt.event.MouseEvent evt){
+        game.newGame();
+        p1Label.setText("");
+        p2Label.setText("");
+        p3Label.setText("");
+        p4Label.setText("");
+        p5Label.setText("");
+        p6Label.setText("");
+        p7Label.setText("");
+        p8Label.setText("");
+        p9Label.setText("");
+        
     }
 
 }
