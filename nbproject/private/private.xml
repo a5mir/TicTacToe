@@ -5,6 +5,9 @@
         <group>
             <file>file:/home/asmir465/git/TicTacToe/src/tictactoe/TicTacToe.java</file>
             <file>file:/home/asmir465/git/TicTacToe/src/tictactoe/GameFrame.java</file>
+            <file>file:/home/asmir465/git/TicTacToe/src/tictactoe/Bot.java</file>
+            <file>file:/home/asmir465/git/TicTacToe/src/tictactoe/Player.java</file>
+            <file>file:/home/asmir465/git/TicTacToe/src/tictactoe/GameHelper.java</file>
         </group>
     </open-files>
 </project-private>

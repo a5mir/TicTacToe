@@ -17,7 +17,7 @@ public class Main {
             gFrame.setVisible(true);
         };
         SwingUtilities.invokeAndWait(myGUI);
-         
+        
     }
     
 }

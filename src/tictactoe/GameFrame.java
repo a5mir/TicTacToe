@@ -42,14 +42,16 @@ public class GameFrame extends JFrame {
     JButton newGameButton = new JButton("New Game");
 
     GridBagLayout gbLayout = new GridBagLayout();
-    TicTacToe game = new TicTacToe();
+    Player player = new Player();
+    
+    Bot bot = new Bot();
 
     public GameFrame() {
         initComponents();
     }
 
     private void initComponents() {
-
+        
         this.add(gamePanel);
         this.add(statisticPanel);
 
@@ -204,6 +206,8 @@ public class GameFrame extends JFrame {
         game.registerSign(0);
         game.declareWinner();
         outcomeLabel.setText(game.status);
+        bot.posArray.add(0);
+        botMove();
     }
 
     private void p2MouseReleased(java.awt.event.MouseEvent evt) {
@@ -217,6 +221,8 @@ public class GameFrame extends JFrame {
         game.registerSign(1);
         game.declareWinner();
         outcomeLabel.setText(game.status);
+        bot.posArray.add(1);
+        botMove();
     }
 
     private void p3MouseReleased(java.awt.event.MouseEvent evt) {
@@ -230,6 +236,8 @@ public class GameFrame extends JFrame {
         game.registerSign(2);
         game.declareWinner();
         outcomeLabel.setText(game.status);
+        bot.posArray.add(2);
+        botMove();
     }
 
     private void p4MouseReleased(java.awt.event.MouseEvent evt) {
@@ -243,6 +251,8 @@ public class GameFrame extends JFrame {
         game.registerSign(3);
         game.declareWinner();
         outcomeLabel.setText(game.status);
+        bot.posArray.add(3);
+        botMove();
     }
 
     private void p5MouseReleased(java.awt.event.MouseEvent evt) {
@@ -256,6 +266,8 @@ public class GameFrame extends JFrame {
         game.registerSign(4);
         game.declareWinner();
         outcomeLabel.setText(game.status);
+        bot.posArray.add(4);
+        botMove();
     }
 
     private void p6MouseReleased(java.awt.event.MouseEvent evt) {
@@ -269,6 +281,8 @@ public class GameFrame extends JFrame {
         game.registerSign(5);
         game.declareWinner();
         outcomeLabel.setText(game.status);
+        bot.posArray.add(5);
+        botMove();
     }
 
     private void p7MouseReleased(java.awt.event.MouseEvent evt) {
@@ -282,6 +296,8 @@ public class GameFrame extends JFrame {
         game.registerSign(6);
         game.declareWinner();
         outcomeLabel.setText(game.status);
+        bot.posArray.add(6);
+        botMove();
     }
 
     private void p8MouseReleased(java.awt.event.MouseEvent evt) {
@@ -295,6 +311,8 @@ public class GameFrame extends JFrame {
         game.registerSign(7);
         game.declareWinner();
         outcomeLabel.setText(game.status);
+        bot.posArray.add(7);
+        botMove();
     }
 
     private void p9MouseReleased(java.awt.event.MouseEvent evt) {
@@ -308,6 +326,25 @@ public class GameFrame extends JFrame {
         game.registerSign(8);
         game.declareWinner();
         outcomeLabel.setText(game.status);
+        bot.posArray.add(8);
+        botMove();
+    }
+    
+    private void botMove(){
+        bot.makeMove();
+        switch (bot.nextMove) {
+            case 0 : p1Label.setText("<html><font color='red' size=15>" + bot.sign + "</font></html>");
+            case 1 : p2Label.setText("<html><font color='red' size=15>" + bot.sign + "</font></html>");
+            case 2 : p3Label.setText("<html><font color='red' size=15>" + bot.sign + "</font></html>");
+            case 3 : p4Label.setText("<html><font color='red' size=15>" + bot.sign + "</font></html>");
+            case 4 : p5Label.setText("<html><font color='red' size=15>" + bot.sign + "</font></html>");
+            case 5 : p6Label.setText("<html><font color='red' size=15>" + bot.sign + "</font></html>");
+            case 6 : p7Label.setText("<html><font color='red' size=15>" + bot.sign + "</font></html>");
+            case 7 : p8Label.setText("<html><font color='red' size=15>" + bot.sign + "</font></html>");
+            case 8 : p9Label.setText("<html><font color='red' size=15>" + bot.sign + "</font></html>");
+            
+        }
+        
     }
     
     private void newGameButtonReleased(java.awt.event.MouseEvent evt){
