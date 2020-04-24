@@ -3,8 +3,6 @@ package tictactoe;
 import java.awt.Color;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -42,16 +40,20 @@ public class GameFrame extends JFrame {
     JButton newGameButton = new JButton("New Game");
 
     GridBagLayout gbLayout = new GridBagLayout();
-    Player player = new Player();
     
+    
+    GameHelper game = new GameHelper();
     Bot bot = new Bot();
+//    Bot bot;
+    
 
     public GameFrame() {
         initComponents();
     }
 
     private void initComponents() {
-        
+        game.newGame();
+//        bot = new Bot(game.botSign);
         this.add(gamePanel);
         this.add(statisticPanel);
 
@@ -196,159 +198,204 @@ public class GameFrame extends JFrame {
     }
 
     private void p1MouseReleased(java.awt.event.MouseEvent evt) {
-        game.setCorrectSign();
-        char tempChar = game.sign;
+
+        char tempChar = game.playerSign;
         if (tempChar == 'X') {
-            p1Label.setText("<html><font color='red' size=15>" + String.valueOf(game.sign) + "</font></html>");
+            p1Label.setText("<html><font color='red' size=15>" + String.valueOf(game.playerSign) + "</font></html>");
         } else {
-            p1Label.setText("<html><font color='blue' size=15>" + String.valueOf(game.sign) + "</font></html>");
+            p1Label.setText("<html><font color='blue' size=15>" + String.valueOf(game.playerSign) + "</font></html>");
         }
-        game.registerSign(0);
+        
+        game.chooseField(tempChar, 0);
         game.declareWinner();
-        outcomeLabel.setText(game.status);
-        bot.posArray.add(0);
+        outcomeLabel.setText(game.gameStatus);
+        bot.move();
         botMove();
+//        botMove();
+
     }
 
     private void p2MouseReleased(java.awt.event.MouseEvent evt) {
-        game.setCorrectSign();
-        char tempChar = game.sign;
+
+        char tempChar = game.playerSign;
         if (tempChar == 'X') {
-            p2Label.setText("<html><font color='red' size=15>" + String.valueOf(game.sign) + "</font></html>");
+            p2Label.setText("<html><font color='red' size=15>" + String.valueOf(game.playerSign) + "</font></html>");
         } else {
-            p2Label.setText("<html><font color='blue' size=15>" + String.valueOf(game.sign) + "</font></html>");
+            p2Label.setText("<html><font color='blue' size=15>" + String.valueOf(game.playerSign) + "</font></html>");
         }
-        game.registerSign(1);
+        
+        game.chooseField(tempChar, 1);
         game.declareWinner();
-        outcomeLabel.setText(game.status);
-        bot.posArray.add(1);
+        outcomeLabel.setText(game.gameStatus);
+        bot.move();
         botMove();
+//        botMove();
     }
 
     private void p3MouseReleased(java.awt.event.MouseEvent evt) {
-        game.setCorrectSign();
-        char tempChar = game.sign;
+        char tempChar = game.playerSign;
         if (tempChar == 'X') {
-            p3Label.setText("<html><font color='red' size=15>" + String.valueOf(game.sign) + "</font></html>");
+            p3Label.setText("<html><font color='red' size=15>" + String.valueOf(game.playerSign) + "</font></html>");
         } else {
-            p3Label.setText("<html><font color='blue' size=15>" + String.valueOf(game.sign) + "</font></html>");
+            p3Label.setText("<html><font color='blue' size=15>" + String.valueOf(game.playerSign) + "</font></html>");
         }
-        game.registerSign(2);
+     
+        game.chooseField(tempChar, 2);
         game.declareWinner();
-        outcomeLabel.setText(game.status);
-        bot.posArray.add(2);
+        outcomeLabel.setText(game.gameStatus);
+        bot.move();
         botMove();
+//        botMove();
     }
 
     private void p4MouseReleased(java.awt.event.MouseEvent evt) {
-        game.setCorrectSign();
-        char tempChar = game.sign;
+        char tempChar = game.playerSign;
         if (tempChar == 'X') {
-            p4Label.setText("<html><font color='red' size=15>" + String.valueOf(game.sign) + "</font></html>");
+            p4Label.setText("<html><font color='red' size=15>" + String.valueOf(game.playerSign) + "</font></html>");
         } else {
-            p4Label.setText("<html><font color='blue' size=15>" + String.valueOf(game.sign) + "</font></html>");
+            p4Label.setText("<html><font color='blue' size=15>" + String.valueOf(game.playerSign) + "</font></html>");
         }
-        game.registerSign(3);
+       
+        game.chooseField(tempChar, 3);
         game.declareWinner();
-        outcomeLabel.setText(game.status);
-        bot.posArray.add(3);
+        outcomeLabel.setText(game.gameStatus);
+        bot.move();
         botMove();
+//        botMove();
     }
 
     private void p5MouseReleased(java.awt.event.MouseEvent evt) {
-        game.setCorrectSign();
-        char tempChar = game.sign;
+        char tempChar = game.playerSign;
         if (tempChar == 'X') {
-            p5Label.setText("<html><font color='red' size=15>" + String.valueOf(game.sign) + "</font></html>");
+            p5Label.setText("<html><font color='red' size=15>" + String.valueOf(game.playerSign) + "</font></html>");
         } else {
-            p5Label.setText("<html><font color='blue' size=15>" + String.valueOf(game.sign) + "</font></html>");
+            p5Label.setText("<html><font color='blue' size=15>" + String.valueOf(game.playerSign) + "</font></html>");
         }
-        game.registerSign(4);
+       
+        game.chooseField(tempChar, 4);
         game.declareWinner();
-        outcomeLabel.setText(game.status);
-        bot.posArray.add(4);
+        outcomeLabel.setText(game.gameStatus);
+        bot.move();
         botMove();
+//        botMove();
     }
 
     private void p6MouseReleased(java.awt.event.MouseEvent evt) {
-        game.setCorrectSign();
-        char tempChar = game.sign;
+        char tempChar = game.playerSign;
         if (tempChar == 'X') {
-            p6Label.setText("<html><font color='red' size=15>" + String.valueOf(game.sign) + "</font></html>");
+            p6Label.setText("<html><font color='red' size=15>" + String.valueOf(game.playerSign) + "</font></html>");
         } else {
-            p6Label.setText("<html><font color='blue' size=15>" + String.valueOf(game.sign) + "</font></html>");
+            p6Label.setText("<html><font color='blue' size=15>" + String.valueOf(game.playerSign) + "</font></html>");
         }
-        game.registerSign(5);
+     
+        game.chooseField(tempChar, 5);
         game.declareWinner();
-        outcomeLabel.setText(game.status);
-        bot.posArray.add(5);
+        outcomeLabel.setText(game.gameStatus);
+        bot.move();
         botMove();
+//        botMove();
     }
 
     private void p7MouseReleased(java.awt.event.MouseEvent evt) {
-        game.setCorrectSign();
-        char tempChar = game.sign;
+       char tempChar = game.playerSign;
         if (tempChar == 'X') {
-            p7Label.setText("<html><font color='red' size=15>" + String.valueOf(game.sign) + "</font></html>");
+            p7Label.setText("<html><font color='red' size=15>" + String.valueOf(game.playerSign) + "</font></html>");
         } else {
-            p7Label.setText("<html><font color='blue' size=15>" + String.valueOf(game.sign) + "</font></html>");
+            p7Label.setText("<html><font color='blue' size=15>" + String.valueOf(game.playerSign) + "</font></html>");
         }
-        game.registerSign(6);
+      
+        game.chooseField(tempChar, 6);
         game.declareWinner();
-        outcomeLabel.setText(game.status);
-        bot.posArray.add(6);
+        outcomeLabel.setText(game.gameStatus);
+        bot.move();
         botMove();
+//        botMove();
     }
 
     private void p8MouseReleased(java.awt.event.MouseEvent evt) {
-        game.setCorrectSign();
-        char tempChar = game.sign;
+        char tempChar = game.playerSign;
         if (tempChar == 'X') {
-            p8Label.setText("<html><font color='red' size=15>" + String.valueOf(game.sign) + "</font></html>");
+            p8Label.setText("<html><font color='red' size=15>" + String.valueOf(game.playerSign) + "</font></html>");
         } else {
-            p8Label.setText("<html><font color='blue' size=15>" + String.valueOf(game.sign) + "</font></html>");
+            p8Label.setText("<html><font color='blue' size=15>" + String.valueOf(game.playerSign) + "</font></html>");
         }
-        game.registerSign(7);
+      
+        game.chooseField(tempChar, 7);
         game.declareWinner();
-        outcomeLabel.setText(game.status);
-        bot.posArray.add(7);
+        outcomeLabel.setText(game.gameStatus);
+        bot.move();
         botMove();
+//        botMove();
     }
 
     private void p9MouseReleased(java.awt.event.MouseEvent evt) {
-        game.setCorrectSign();
-        char tempChar = game.sign;
+       char tempChar = game.playerSign;
         if (tempChar == 'X') {
-            p9Label.setText("<html><font color='red' size=15>" + String.valueOf(game.sign) + "</font></html>");
+            p9Label.setText("<html><font color='red' size=15>" + String.valueOf(game.playerSign) + "</font></html>");
         } else {
-            p9Label.setText("<html><font color='blue' size=15>" + String.valueOf(game.sign) + "</font></html>");
+            p9Label.setText("<html><font color='blue' size=15>" + String.valueOf(game.playerSign) + "</font></html>");
         }
-        game.registerSign(8);
+   
+        game.chooseField(tempChar, 8);
         game.declareWinner();
-        outcomeLabel.setText(game.status);
-        bot.posArray.add(8);
+        outcomeLabel.setText(game.gameStatus);
+        bot.move();
         botMove();
+//        botMove();
     }
-    
-    private void botMove(){
-        bot.makeMove();
+
+    private void botMove() {
         switch (bot.nextMove) {
-            case 0 : p1Label.setText("<html><font color='red' size=15>" + bot.sign + "</font></html>");
-            case 1 : p2Label.setText("<html><font color='red' size=15>" + bot.sign + "</font></html>");
-            case 2 : p3Label.setText("<html><font color='red' size=15>" + bot.sign + "</font></html>");
-            case 3 : p4Label.setText("<html><font color='red' size=15>" + bot.sign + "</font></html>");
-            case 4 : p5Label.setText("<html><font color='red' size=15>" + bot.sign + "</font></html>");
-            case 5 : p6Label.setText("<html><font color='red' size=15>" + bot.sign + "</font></html>");
-            case 6 : p7Label.setText("<html><font color='red' size=15>" + bot.sign + "</font></html>");
-            case 7 : p8Label.setText("<html><font color='red' size=15>" + bot.sign + "</font></html>");
-            case 8 : p9Label.setText("<html><font color='red' size=15>" + bot.sign + "</font></html>");
-            
+            case 0:
+                p1Label.setText("<html><font color='black' size=15>" + bot.sign + "</font></html>");
+                System.out.println("1");
+                break;
+            case 1:
+                p2Label.setText("<html><font color='black' size=15>" + bot.sign + "</font></html>");
+                System.out.println("2");
+                break;
+            case 2:
+                p3Label.setText("<html><font color='black' size=15>" + bot.sign + "</font></html>");
+                System.out.println("3");
+                break;
+            case 3:
+                p4Label.setText("<html><font color='black' size=15>" + bot.sign + "</font></html>");
+                System.out.println("4");
+                break;
+            case 4:
+                p5Label.setText("<html><font color='black' size=15>" + bot.sign + "</font></html>");
+                System.out.println("5");
+                break;
+            case 5:
+                p6Label.setText("<html><font color='black' size=15>" + bot.sign + "</font></html>");
+                System.out.println("6");
+                break;
+            case 6:
+                p7Label.setText("<html><font color='black' size=15>" + bot.sign + "</font></html>");
+                System.out.println("7");
+                break;
+            case 7:
+                p8Label.setText("<html><font color='black' size=15>" + bot.sign + "</font></html>");
+                System.out.println("8");
+                break;
+            case 8:
+                p9Label.setText("<html><font color='black' size=15>" + bot.sign + "</font></html>");
+                System.out.println("9");
+                break;
+            default: 
+                System.out.println("DEFAULT");
+                break;
         }
-        
+
     }
-    
-    private void newGameButtonReleased(java.awt.event.MouseEvent evt){
+
+    private void newGameButtonReleased(java.awt.event.MouseEvent evt) {
         game.newGame();
+        bot.sign = game.botSign;
+        if(bot.sign == 'X'){
+            bot.firstMove();
+            botMove();
+        }
         p1Label.setText("");
         p2Label.setText("");
         p3Label.setText("");
@@ -359,7 +406,6 @@ public class GameFrame extends JFrame {
         p8Label.setText("");
         p9Label.setText("");
         outcomeLabel.setText("");
-        
     }
 
 }

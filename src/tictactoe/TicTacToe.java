@@ -17,17 +17,17 @@ public class TicTacToe extends GameHelper {
     public TicTacToe() {
     }
 
-    public void setCorrectSign() {
-        if (sign == 'X') {
-            sign = 'O';
-        } else {
-            sign = 'X';
-        }
-    }
+//    public void setCorrectSign() {
+//        if (sign == 'X') {
+//            sign = 'O';
+//        } else {
+//            sign = 'X';
+//        }
+//    }
 
-    public void registerSign(int position) {
-        signArray[position] = sign;
-    }
+//    public void registerSign(int position) {
+//        signArray[position] = sign;
+//    }
     
    
     

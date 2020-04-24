@@ -1,6 +1,7 @@
 package tictactoe;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  *
@@ -8,15 +9,15 @@ import java.util.ArrayList;
  */
 public class GameHelper {
 
-    int firstMove; //store number 0 or 1, that will help decide who will play first
-    char playerSign; // it can be X or O, who plays first get X
-    char botSign;
-    ArrayList<Integer> fieldsList = new ArrayList<>(); //store numbers of used fields (0-8)
-    char[] signArray = new char[9]; //on every position store is it X or O        
-    String gameStatus;
-    boolean isFinished = false;
+    public int firstMove; //store number 0 or 1, that will help decide who will play first
+    public char playerSign; // it can be X or O, who plays first get X
+    public char botSign;
+    public ArrayList<Integer> fieldsList = new ArrayList<>(); //store numbers of used fields (0-8)
+    public ArrayList<Character> charList = new ArrayList<>();
+//    public char[] signArray = new char[9]; //on every position store is it X or O        
+    public String gameStatus;
+    public boolean isFinished = false;
 
-    //consturctor
     public GameHelper() {
     }
 
@@ -35,78 +36,78 @@ public class GameHelper {
         }
     }
 
-    public void freeFields(int fields) {
-        fieldsList.add(fields);
+    public void chooseField(char sign, int pos) {
+       charList.add(pos, sign);
     }
 
-    public void chooseField(char sign, int position) {
-        signArray[position] = sign;
+    public void newGame() {
+        setSign();
+        for(int i = 0; i< 9; i++){
+        charList.add(i, '\u0000');
+        }
+        System.out.println(charList.get(8));
+        isFinished = false;
+        gameStatus = "";
     }
 
     public void declareWinner() {
-        int isFull = 0;
-        for (char arrays : signArray) {
-            if (arrays != '\u0000') {
-                isFull++;
-            }
-        }
-        if (signArray[0] == signArray[1] && signArray[1] == signArray[2] && signArray[0] != '\u0000') {
-            if (signArray[0] == 'X') {
+        if (charList.get(0) == charList.get(1) && charList.get(1) == charList.get(2) && charList.get(0) != '\u0000') {
+            if (charList.get(0) == 'X') {
                 gameStatus = "<html><font color='red' size=5>Player1 wins</font></html>";
             } else {
                 gameStatus = "<html><font color='blue' size=5>Player2 wins</font></html>";
             }
             isFinished = true;
-        } else if (signArray[3] == signArray[4] && signArray[4] == signArray[5] && signArray[3] != '\u0000') {
-            if (signArray[3] == 'X') {
+        } else if (charList.get(3) ==charList.get(4) && charList.get(4) == charList.get(5) && charList.get(3) != '\u0000') {
+            if (charList.get(3) == 'X') {
                 gameStatus = "<html><font color='red' size=5>Player1 wins</font></html>";
             } else {
                 gameStatus = "<html><font color='blue' size=5>Player2 wins</font></html>";
             }
             isFinished = true;
-        } else if (signArray[6] == signArray[7] && signArray[7] == signArray[8] && signArray[6] != '\u0000') {
-            if (signArray[6] == 'X') {
+        } else if (charList.get(6) == charList.get(7) && charList.get(7) == charList.get(8) && charList.get(6) != '\u0000') {
+            if (charList.get(6) == 'X') {
                 gameStatus = "<html><font color='red' size=5>Player1 wins</font></html>";
             } else {
                 gameStatus = "<html><font color='blue' size=5>Player2 wins</font></html>";
             }
             isFinished = true;
-        } else if (signArray[0] == signArray[3] && signArray[3] == signArray[6] && signArray[0] != '\u0000') {
-            if (signArray[0] == 'X') {
+        } else if (charList.get(0) == charList.get(3) && charList.get(3) == charList.get(6) && charList.get(0) != '\u0000') {
+            if (charList.get(0) == 'X') {
                 gameStatus = "<html><font color='red' size=5>Player1 wins</font></html>";
             } else {
                 gameStatus = "<html><font color='blue' size=5>Player2 wins</font></html>";
             }
             isFinished = true;
-        } else if (signArray[1] == signArray[4] && signArray[4] == signArray[7] && signArray[1] != '\u0000') {
-            if (signArray[1] == 'X') {
+        } else if (charList.get(1) == charList.get(4) && charList.get(4) == charList.get(7) && charList.get(1) != '\u0000') {
+            if (charList.get(1) == 'X') {
                 gameStatus = "<html><font color='red' size=5>Player1 wins</font></html>";
             } else {
                 gameStatus = "<html><font color='blue' size=5>Player2 wins</font></html>";
             }
             isFinished = true;
-        } else if (signArray[2] == signArray[5] && signArray[5] == signArray[8] && signArray[2] != '\u0000') {
-            if (signArray[2] == 'X') {
+        } else if (charList.get(2) == charList.get(5) && charList.get(5) == charList.get(8) && charList.get(2) != '\u0000') {
+            if (charList.get(2) == 'X') {
                 gameStatus = "<html><font color='red' size=5>Player1 wins</font></html>";
             } else {
                 gameStatus = "<html><font color='blue' size=5>Player2 wins</font></html>";
             }
             isFinished = true;
-        } else if (signArray[0] == signArray[4] && signArray[4] == signArray[8] && signArray[0] != '\u0000') {
-            if (signArray[0] == 'X') {
+        } else if (charList.get(0) == charList.get(4) && charList.get(4) == charList.get(8) && charList.get(0) != '\u0000') {
+            if (charList.get(0) == 'X') {
                 gameStatus = "<html><font color='red' size=5>Player1 wins</font></html>";
             } else {
                 gameStatus = "<html><font color='blue' size=5>Player2 wins</font></html>";
             }
             isFinished = true;
-        } else if (signArray[2] == signArray[4] && signArray[4] == signArray[6] && signArray[2] != '\u0000') {
-            if (signArray[2] == 'X') {
+        } else if (charList.get(2) == charList.get(4) && charList.get(4) == charList.get(6) && charList.get(2) != '\u0000') {
+            if (charList.get(2) == 'X') {
                 gameStatus = "<html><font color='red' size=5>Player1 wins</font></html>";
             } else {
                 gameStatus = "<html><font color='blue' size=5>Player2 wins</font></html>";
             }
             isFinished = true;
-        } else if (isFull == 9) {
+        } else if (charList.size() == 9) {
             gameStatus = "<html><font color='black' size=5>Tie</font></html>";
             isFinished = true;
         }

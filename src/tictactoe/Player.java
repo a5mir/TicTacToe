@@ -9,7 +9,7 @@ package tictactoe;
  *
  * @author asmir465
  */
-public  class Player extends GameHelper{
+public  class Player{
     
     public Player(){
     }
